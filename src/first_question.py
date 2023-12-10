@@ -1,50 +1,53 @@
 from enum import Enum
 from typing import Tuple
 
-import inquiry  # imports the
-from format import bot_format
+import inquiry  # Importing the inquiry module for user interaction
 
+from format import bot_format  # Importing formatting functions for consistent user interface
 
-class FirstOpenQuestionResponse(Enum):  # define a class which represents the user's response to first question
+class FirstOpenQuestionResponse(Enum):  # Defining a class for first open question
     Studying = 0
     Sports = 1
     Activities = 2
 
+    # String representation of the classes
     def __str__(self):
-        match self.value:
-            case 0:
+         match self.value:
+            case 0:  #If the value is 0, it represents "Studying
                 return "Studying"
-            case 1:
-                return "Sports"
-            case 2:
+            case 1:  #If the value is 1, it represents "Sports"
+                return "Sports" 
+            case 2:  #If the value is 2, it represents "Social Activities"
                 return "Social Activities"
 
-
+# Function to handle the first open question to the user
 def first_open_question() -> Tuple[FirstOpenQuestionResponse, str]:
-    print(bot_format("What can I help you with?"))
+    print(bot_format("What can I help you with?"))                #Presents the initial question to the user
 
-    similarity_ratios, user_response = inquiry.keywords([keywords_for_studying, keywords_for_sports, keywords_for_activities])
-    print(similarity_ratios) # TODO: Remove this print
-    max_similarity_ratio = max(similarity_ratios)
+    similarity_ratios, user_response = inquiry.keywords([keywords_for_studying, keywords_for_sports, keywords_for_activities]) # Analyzing user response based on 3 different categories of predefined keywords
+    print(similarity_ratios)  TODO: #Remove later
+
+    max_similarity_ratio = max(similarity_ratios)  #Determines the highest similarity ratio
 
     firstQuestionResponse: FirstOpenQuestionResponse | None = None
-    if max_similarity_ratio < 20:
-        print(bot_format("Sorry I was unable to determine what should I help you with."))
-        print(bot_format("Please choose what are you interested in:"))
+    if max_similarity_ratio < 20:   #if the matching % <20 then runs the following code 
+        print(bot_format("Sorry, I was unable to determine what I should help you with"))  #if the similarity is less than 20 then prints the message
+        print(bot_format("Please choose what you are interested in:"))    #gives the user 3 options to select from
         option_index = inquiry.checkbox(["studying", "sport", "social Activities"])
-        firstQuestionResponse = FirstOpenQuestionResponse(option_index)
+        firstQuestionResponse = FirstOpenQuestionResponse(option_index)  # Setting the response based on user's choice
     else:
-        similarity_ratios_index = similarity_ratios.index(max(similarity_ratios))
-        firstQuestionResponse = FirstOpenQuestionResponse(similarity_ratios_index)
+        similarity_ratios_index = similarity_ratios.index(max(similarity_ratios)) #Finds the index of the highest similarity ratio
+        firstQuestionResponse = FirstOpenQuestionResponse(similarity_ratios_index)  #Sets the response based on the highest similarity ratio
+        # Confirming with the user if the detected interest is correct
         print(bot_format(f"It seems like you are interested in {firstQuestionResponse}, is that correct?"))
-        if inquiry.confirm():
+        if inquiry.confirm(): # Confirming the interest with the user
             return firstQuestionResponse, user_response
-        else:
+        else:                 # Re-asking the question if the user denies the detected interest
             return first_open_question()
+        
+    return firstQuestionResponse, user_response # Returning the determined response and the original user response
 
-    return firstQuestionResponse, user_response
-
-
+# Keywords for analyzing user response for studying related queries
 keywords_for_studying = [
     "school work",
     "learn",
@@ -61,6 +64,7 @@ keywords_for_studying = [
     "my studies"
 ]
 
+# Keywords for analyzing user response for sports related queries
 keywords_for_sports = [
     "play",
     "athletics",
@@ -103,6 +107,7 @@ keywords_for_sports = [
     "Animal shelter volunteers",
 ]
 
+# Keywords for analyzing user response for social activities related queries
 keywords_for_activities = [
     "social activities",
     "student association",
