@@ -18,7 +18,7 @@ def main():# Start of the main function
             activities_path(user_response)              #redirects to the first activities section question
 
 def studying_path(user_response_to_first_question: str): #the path for users interested in studying related queries.
-    is_struggling = False                                # Checks for struggling keywords in user's response.
+    is_struggling = False                                # defining the struggling function false
     if not compare.contains_negation_word(user_response_to_first_question):  #the negative words are taken as the opposite intended meaning
         struggling_keywords = ["struggling", "struggle"]                  #defining the struggling keywords
         if compare.contains_exact(user_response_to_first_question, struggling_keywords):  #if sturggling keywords is found then it stated as true
@@ -38,7 +38,7 @@ def studying_path(user_response_to_first_question: str): #the path for users int
         studying_not_struggling_path()
 
 def studying_struggling_path(user_response_to_first_question: str):  # Path for users who are struggling with studying.
-    wants_to_share = False
+    wants_to_share = False   #pre-defining the wants to share function as false
     # Checks if the user wants to share their struggles.
     if not compare.contains_negation_word(user_response_to_first_question):           #the negative words are taken as the opposite intended meaning
         share_keywords = ["share"]                                                    #checks for defined truggle keywords
@@ -66,10 +66,10 @@ def studying_not_struggling_path(): # Path for users who are not struggling with
 def sports_path(user_response_to_first_question: str):  # Path for users interested in sports related queries.
     print(bot_format("Do you have a specific sport in mind or you are looking for something new?")) #asks user about specific sports path or exploring new sports
     user_choice = inquiry.checkbox(["Specific sport", "Something new"])     # Redirects to specific sports path or exploring new sports based on user choice.
-        if user_choice == 0:
-            sports_specific_path(user_response_to_first_question)           # If yes the code calls the function of the path for a specific sport.
-        else:
-            sports_something_new_path(user_response_to_first_question)      # If not the code calls the function for exploring new sports.
+    if user_choice == 0:
+        sports_specific_path(user_response_to_first_question)           # If yes the code calls the function of the path for a specific sport.
+    else:
+        sports_something_new_path(user_response_to_first_question)      # If not the code calls the function for exploring new sports.
 
 def sports_specific_path(user_response_to_first_question: str):  # Path for users who have a specific sport in mind.
     def print_sport_available_message():
@@ -89,11 +89,11 @@ def sports_specific_path(user_response_to_first_question: str):  # Path for user
         print(bot_format("Unfortunately this specific sport is not available at the university, sorry."))
 
 def sports_something_new_path(user_response_to_first_question: str):
-    # TODO: This path is to be created for users looking for new sports.
+    #TODO: This path is to be created for users looking for new sports.
 
 def activities_path(user_response_to_first_question: str):      # Path for users interested in activities.
-    interested_in_upcoming = False
-    wants_to_join_association = False
+    interested_in_upcoming = False     #pre-defining the student interested in upcoming events as false
+    wants_to_join_association = False   #predefining the student wants to join association function as false
     # Checks if the user is interested in upcoming events or joining an association.
     if not compare.contains_negation_word(user_response_to_first_question):   #checks if the user's response does not have any negative word
         upcoming_keywords = ["upcoming"]                                    #defined checklist for upcoming word

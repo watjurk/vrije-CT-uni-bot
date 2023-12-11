@@ -25,7 +25,7 @@ def first_open_question() -> Tuple[FirstOpenQuestionResponse, str]:
     print(bot_format("What can I help you with?"))                #Presents the initial question to the user
 
     similarity_ratios, user_response = inquiry.keywords([keywords_for_studying, keywords_for_sports, keywords_for_activities]) # Analyzing user response based on 3 different categories of predefined keywords
-    print(similarity_ratios)  TODO: #Remove later
+    print(similarity_ratios)  #TODO: #Remove later
 
     max_similarity_ratio = max(similarity_ratios)  #Determines the highest similarity ratio
 
