@@ -28,7 +28,7 @@ def contains_exact(input: str, keywords: List[str]) -> bool: # Function to check
     # Iterating through each keyword in the list.
     for keyword in keywords:
 
-        if keyword in input:# Checks if the keyword is found in the input--> return True.
+        if keyword in input: # Checks if the keyword is found in the input--> return True.
             return True
         else:               # If none of the keywords are found, return False.
             return False

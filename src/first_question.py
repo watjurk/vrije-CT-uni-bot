@@ -1,33 +1,31 @@
 from enum import Enum
 from typing import Tuple
 
-import inquiry  # Importing the inquiry module for user interaction
+import inquiry  # Importing the inquiry module for user interaction.
 
-from format import bot_format  # Importing formatting functions for consistent user interface
+from format import bot_format  # Importing formatting functions for consistent user interface.
 
-class FirstOpenQuestionResponse(Enum):  # Defining a class for first open question
+class FirstOpenQuestionResponse(Enum):  # Defining a class for first open question.
     Studying = 0
     Sports = 1
     Activities = 2
 
-    # String representation of the classes
+    # String representation of the classes.
     def __str__(self):
          match self.value:
-            case 0:  #If the value is 0, it represents "Studying
+            case 0:  #If the value is 0, it represents "Studying".
                 return "Studying"
-            case 1:  #If the value is 1, it represents "Sports"
+            case 1:  #If the value is 1, it represents "Sports".
                 return "Sports" 
-            case 2:  #If the value is 2, it represents "Social Activities"
+            case 2:  #If the value is 2, it represents "Social Activities".
                 return "Social Activities"
 
-# Function to handle the first open question to the user
+# Function to handle the first open question to the user.
 def first_open_question() -> Tuple[FirstOpenQuestionResponse, str]:
-    print(bot_format("What can I help you with?"))                #Presents the initial question to the user
+    print(bot_format("What can I help you with?"))         # Presents the initial question to the user.
 
-    similarity_ratios, user_response = inquiry.keywords([keywords_for_studying, keywords_for_sports, keywords_for_activities]) # Analyzing user response based on 3 different categories of predefined keywords
-    print(similarity_ratios)  #TODO: #Remove later
-
-    max_similarity_ratio = max(similarity_ratios)  #Determines the highest similarity ratio
+    similarity_ratios, user_response = inquiry.keywords([keywords_for_studying, keywords_for_sports, keywords_for_activities]) # Analyzing user response based on 3 different categories of predefined keywords.
+    max_similarity_ratio = max(similarity_ratios) # Determines the highest similarity ratio.
 
     firstQuestionResponse: FirstOpenQuestionResponse | None = None
     if max_similarity_ratio < 20:   #if the matching % <20 then runs the following code 

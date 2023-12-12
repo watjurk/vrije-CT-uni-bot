@@ -38,7 +38,7 @@ def time_to_event(unilife_event: str) -> float:    # Function to calculate the t
         datetime_format = "%d %B"  # Second datetime format in exception cases
         event_datetime = parse_datetime(event_date, datetime_format)
 
-    now = datetime.datetime.now()            #importing the current date and time
+    now = datetime.datetime.now()            # importing the current date and time
     today_year = datetime.date.today().year  # importing the current year
 
     event_datetime = event_datetime.replace(year=today_year)           # Updating the year in the event's datetime object
