@@ -94,7 +94,7 @@ def sports_path(user_response_to_first_question: str):  # Path for users interes
     if user_choice == 0:
         sports_specific_path(user_response_to_first_question)  # If yes the code calls the function of the path for a specific sport.
     else:
-        sports_something_new_path(user_response_to_first_question)  # If not the code calls the function for exploring new sports.
+        sports_something_new_path()  # If not the code calls the function for exploring new sports.
 
 
 def sports_specific_path(user_response_to_first_question: str):  # Path for users who have a specific sport in mind.
@@ -120,7 +120,7 @@ def sports_specific_path(user_response_to_first_question: str):  # Path for user
         print(bot_format("Unfortunately this specific sport is not available at the university, sorry."))
 
 
-def sports_something_new_path(user_response_to_first_question: str):
+def sports_something_new_path():
     print(bot_format("What type of sport are you interested in?"))
     print(bot_format("Are you looking for team & individual sports or something focused on fitness?"))
     user_choice = inquiry.checkbox(["sports in teams or individual", "sports focused on fitness"])
@@ -145,7 +145,7 @@ def sports_something_new_path(user_response_to_first_question: str):
         print(bot_format("or would you prefer group fitness activities for a more group environment?"))
         next_user_choice = inquiry.checkbox(["individually", "group environment"])
         if next_user_choice == 0:
-            print(bot_format("Great! For individual fitness, your options include  aikido, and Karate."))
+            print(bot_format("Great! For individual fitness, your options include aikido, and Karate."))
             print(bot_format("These activities are perfect for you."))
             print_sign_up_message()
         else:

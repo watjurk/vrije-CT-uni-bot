@@ -8,10 +8,6 @@ def keywords(keywords_per_topic: List[List[str]]) -> Tuple[List[int], str]:
 
     # Iterating through each set of keywords in the given list of topics
     for keywords in keywords_per_topic:   
-        
-        # Printing the average and maximum similarity ratios
-        print(compare.average_similarity_ratio(response, keywords), compare.max_similarity_ratio(response, keywords))
-        
         # Calculating the combined average similarity ratio for the response against the current set of keywords
         similarity_ratio = (compare.average_similarity_ratio(response, keywords) + compare.max_similarity_ratio(response, keywords)) / 2
         # Adding the calculated similarity ratio to the list
