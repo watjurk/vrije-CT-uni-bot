@@ -63,25 +63,33 @@ def studying_struggling_path(user_response_to_first_question: str):  # Path for 
         print(bot_format("I will suggest seeking out the student advisor."))
 
 
-def studying_not_struggling_path(user_response_to_first_question):  # Path for users who are not struggling with studying.
-    interested_practical_information = False
+def studying_not_struggling_path(user_response_to_first_question):  # Path for users who are not struggling with their studies.
+    interested_practical_information = False  # Initially set to False, indicating no interest in practical information by default.
+
+    # Checking if user's response does not contain negation and if it includes keywords indicating interest in practical information.
     if not compare.contains_negation_word(user_response_to_first_question):
-        interested_practical_information_keywords = ["practical", "information"]
-        if compare.contains_exact(user_response_to_first_question, interested_practical_information_keywords):
+        interested_practical_information_keywords = ["practical", "information"]  # Keywords that signify an interest in practical information.
+        if compare.contains_exact(user_response_to_first_question, interested_practical_information_keywords):# If the user's response contains these keywords, set the function to True.
             interested_practical_information = True
 
+    # If the user is interested in practical information, support their interest.
     if interested_practical_information:
         print(bot_format("It seems like you are interested in practical information."))
     else:
+        # If the user's interest is unclear, ask them to confirm their interest in practical information.
         print(bot_format("Are you interested in practical information?"))
-        interested_practical_information = inquiry.confirm()
+        interested_practical_information = inquiry.confirm()  # User confirmation about their interest in practical information.
 
+    # Based on the user's confirmation, provide appropriate responses and suggestions.
     if interested_practical_information:
+        # If the user is interested, affirm their lack of struggle and provide a contact for further assistance.
         print(bot_format("From what I can tell you are not struggling with anything."))
         print(bot_format("If you need any further assistance you can contact the Student Desk at: studentdesk@vu.nl"))
-        print(bot_format("Be sure to include your student number!"))
+        print(bot_format("Be sure to include your student number!"))  # Reminder to include student number for personalized assistance.
     else:
+        # If the user is not interested in practical information, conclude the interaction with a thank you message.
         print(bot_format("Thanks for using unibot!"))
+
 
 
 def sports_path(user_response_to_first_question: str):  # Path for users interested in sports related queries.
@@ -120,37 +128,37 @@ def sports_specific_path(user_response_to_first_question: str):  # Path for user
         print(bot_format("Unfortunately this specific sport is not available at the university, sorry."))
 
 
-def sports_something_new_path():
+def sports_something_new_path(): # Path guides users who are looking for new sports to explore.
     print(bot_format("What type of sport are you interested in?"))
     print(bot_format("Are you looking for team & individual sports or something focused on fitness?"))
-    user_choice = inquiry.checkbox(["sports in teams or individual", "sports focused on fitness"])
+    user_choice = inquiry.checkbox(["sports in teams or individual", "sports focused on fitness"])  # Asking user to choose between team/individual sports or fitness-focused sports.
 
-    def print_sign_up_message():
+    def print_sign_up_message(): # Sub function to print a sign-up message for the sports center.
         print(bot_format("You can sign-up on the University Sports Centre website: sportcentrumvu.nl."))
 
-    if user_choice == 0:
+    if user_choice == 0:  # Checking if the user is interested in team or individual sports.
         print(bot_format("Are you interested in individual sports or team sports?"))
-        next_user_choice = inquiry.checkbox(["individual sports", "team sports"])
-        if next_user_choice == 0:
+        next_user_choice = inquiry.checkbox(["individual sports", "team sports"])  # Asking user to specify their preference for individual or team sports.
+        if next_user_choice == 0:  # Checking if user chose individual sports.
             print(bot_format("Great! We offer sports like Swimming, Tennis."))
             print(bot_format("These sports are excellent for individual sports and building up endurance."))
-            print_sign_up_message()
+            print_sign_up_message()  # Providing information for signing up.
 
-        else:
+        else:  # User chose team sports.
             print(bot_format("Good to know! We also provide options like Basketball, Football & Waterpolo."))
             print(bot_format("These activities enhance your leadership skills and teamwork."))
-            print_sign_up_message()
-    else:
+            print_sign_up_message()  # Providing information for signing up.
+    else:  # User is interested in fitness-focused activities.
         print(bot_format("Are you interested in fitness activities that you can do individually"))
         print(bot_format("or would you prefer group fitness activities for a more group environment?"))
-        next_user_choice = inquiry.checkbox(["individually", "group environment"])
-        if next_user_choice == 0:
+        next_user_choice = inquiry.checkbox(["individually", "group environment"])  # Asking user to choose between individual or group fitness activities.
+        if next_user_choice == 0:  # User chose individual fitness activities.
             print(bot_format("Great! For individual fitness, your options include aikido, and Karate."))
             print(bot_format("These activities are perfect for you."))
-            print_sign_up_message()
-        else:
+            print_sign_up_message()  # Providing sign-up information.
+        else:  # User chose group fitness activities.
             print(bot_format("Great choice! For group fitness, we offer Zumba and Yoga."))
-            print_sign_up_message()
+            print_sign_up_message()  # Providing sign-up information.
 
 
 def activities_path(user_response_to_first_question: str):  # Path for users interested in activities.
@@ -205,27 +213,25 @@ def activities_upcoming_path():  # Path for users interested in upcoming events.
     print(bot_format("I am sure you will enjoy all of them!"))
 
 
-def activities_join_association():
-    def recommend_association(association_name: str):
+def activities_join_association():                   # This function assists users who want to join an association.
+    def recommend_association(association_name: str):# Sub function to recommend an association based on user choice.
         print(bot_format(f"We would recommend: {association_name}"))
 
     print(bot_format("Would you like to join an association dedicated to sciences/nature or arts/actuality?"))
-    user_choice = inquiry.checkbox(["sciences/nature", "arts/actuality"])
-    if user_choice == 0:
+    user_choice = inquiry.checkbox(["sciences/nature", "arts/actuality"])  # Asking the user to choose their field of interest.
+    if user_choice == 0:  # User chose sciences/nature.
         print(bot_format("Would you say you're more inclined to scientific debate or are you more interested in adventures and animals? "))
-        next_user_choice = inquiry.checkbox(["scientific debate", "adventures and animals"])
-        if next_user_choice == 0:
-            recommend_association("Students for Sustainability, Science Society.")
-        else:
-            recommend_association("Animal Shelter Volunteers, Bunch of Backpackers")
-    else:
+        next_user_choice = inquiry.checkbox(["scientific debate", "adventures and animals"])  # Further specifying the user's interest in the sciences/nature category.
+        if next_user_choice == 0:  # User is inclined towards scientific debate.
+            recommend_association("Students for Sustainability, Science Society.")  # Recommending relevant associations.
+        else:  # User is interested in adventures and animals.
+            recommend_association("Animal Shelter Volunteers, Bunch of Backpackers")  # Recommending relevant associations.
+    else:  # User chose arts/actuality.
         print(bot_format("Do you look forward to learning something new and engaging in creative activities"))
         print(bot_format("or are you more interested in news and debates?"))
-        next_user_choice = inquiry.checkbox(["creative activities", "news and debates"])
-        if next_user_choice == 0:
-            recommend_association("Poetry Pals / Painting and Pottery, Language Club")
-        else:
-            recommend_association("International Students Society, Debate Club")
-
-
+        next_user_choice = inquiry.checkbox(["creative activities", "news and debates"])  # Further specifying the user's interest in the arts/actuality category.
+        if next_user_choice == 0:  # User is interested in creative activities.
+            recommend_association("Poetry Pals / Painting and Pottery, Language Club")  # Recommending relevant associations.
+        else:  # User is interested in news and debates.
+            recommend_association("International Students Society, Debate Club")  # Recommending relevant associations.
 main()  # Initiates the program.
