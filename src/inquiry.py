@@ -4,7 +4,7 @@ from format import USER_PREFIX, bot_format
 
 def keywords(keywords_per_topic: List[List[str]]) -> Tuple[List[int], str]:
     response = input(USER_PREFIX) # Asking the user for input and storing the response
-    similarity_ratios = []                                                #stores the responses similartity ratio
+    similarity_ratios = []                                                #stores the responses similarity ratio
 
     # Iterating through each set of keywords in the given list of topics
     for keywords in keywords_per_topic:   
@@ -32,7 +32,7 @@ def checkbox(options: List[str]) -> int:
         for i, option in enumerate(options):               # Checking if the response matches any of the options (by text or index)
             if response == option or response == str(i + 1):
                 return i                                   # Returning the index of the chosen option
-        print(bot_format("Pease select a correct option")) #  Asking the user to select a correct option if the input is invalid
+        print(bot_format("Please select a correct option")) #  Asking the user to select a correct option if the input is invalid
 
 def confirm() -> bool: #
     while True:       # Continuous loop until a valid 'Yes' or 'No' response is received
@@ -43,4 +43,4 @@ def confirm() -> bool: #
         if confirm_response == "no" or confirm_response == "n":   # Checking for negative responses 
             return False  #Returning False if found
 
-        print(bot_format("Pease respond with Yes or No"))         # Asking the user to respond correctly if the input is invalid
+        print(bot_format("Please respond with Yes or No"))         # Asking the user to respond correctly if the input is invalid

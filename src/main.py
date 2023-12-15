@@ -24,13 +24,13 @@ def studying_path(user_response_to_first_question: str):  # the path for users i
     is_struggling = False  # defining the struggling function false
     if not compare.contains_negation_word(user_response_to_first_question):  # the negative words are taken as the opposite intended meaning
         struggling_keywords = ["struggling", "struggle"]  # defining the struggling keywords
-        if compare.contains_exact(user_response_to_first_question, struggling_keywords):  # if sturggling keywords is found then it stated as true
+        if compare.contains_exact(user_response_to_first_question, struggling_keywords):  # if struggling keywords is found then it stated as true
             is_struggling = True
 
     # Responds based on the detected struggle status.(T/F)
     if is_struggling:  # if the user's response was struggling related then prints the following message
         print(bot_format("It seems like you are struggling with something"))
-    else:  # if the user's response didnt have struggling keywords then asks for confirmation as inquiry
+    else:  # if the user's response didn't have struggling keywords then asks for confirmation as inquiry
         print(bot_format("Are you struggling with something?"))
         is_struggling = inquiry.confirm()
 
@@ -45,14 +45,14 @@ def studying_struggling_path(user_response_to_first_question: str):  # Path for 
     wants_to_share = False  # pre-defining the wants to share function as false
     # Checks if the user wants to share their struggles.
     if not compare.contains_negation_word(user_response_to_first_question):  # the negative words are taken as the opposite intended meaning
-        share_keywords = ["share"]  # checks for defined truggle keywords
-        if compare.contains_exact(user_response_to_first_question, share_keywords):  # if sturggling keywords is found then it stated as true
+        share_keywords = ["share"]  # checks for defined share keywords
+        if compare.contains_exact(user_response_to_first_question, share_keywords):  # if struggling keywords is found then it stated as true
             wants_to_share = True
 
     # Responds based on whether the user wants to share their struggles.
-    if wants_to_share:  # if the user wnats to share was true then the folloing message gets printed
+    if wants_to_share:  # if the user wants to share was true then the following message gets printed
         print(bot_format("It seems like you would like to share your struggles with other students."))
-    else:  # if the user wants to share was flase then a confirmation message gets printed
+    else:  # if the user wants to share was false then a confirmation message gets printed
         print(bot_format("Would you like to share your struggles with other students?"))
         wants_to_share = inquiry.confirm()
 
@@ -124,7 +124,7 @@ def sports_specific_path(user_response_to_first_question: str):  # Path for user
     user_response = input(USER_PREFIX).lower().strip()  # Responds based on whether the mentioned sport is available or not.
     if user_response in unilife.unilife_sports:  # if the user's sport is available in the database then prints the pre-defined message
         print_sport_available_message()
-    else:  # if the user''s sport is not available in the database then prints the error message
+    else:  # if the user's sport is not available in the database then prints the error message
         print(bot_format("Unfortunately this specific sport is not available at the university, sorry."))
 
 
@@ -169,7 +169,7 @@ def activities_path(user_response_to_first_question: str):  # Path for users int
         upcoming_keywords = ["upcoming"]  # defined checklist for upcoming word
         if compare.contains_exact(
             user_response_to_first_question, upcoming_keywords
-        ):  # if there is an exact match of the keywrod defined then it returns as true
+        ):  # if there is an exact match of the keyword defined then it returns as true
             interested_in_upcoming = True
 
         join_association_keywords = ["join", "association"]  # defined keywords for joining an association
@@ -183,7 +183,7 @@ def activities_path(user_response_to_first_question: str):  # Path for users int
         )  # asks user about interest in upcoming events and association joining
         user_choice = inquiry.checkbox(
             ["Upcoming events", "Joining an association"]
-        )  # defined keywords for the uqestion about upcoming events/association joining
+        )  # defined keywords for the question about upcoming events/association joining
         if user_choice == 0:  # if there was a match then
             interested_in_upcoming = True  # the user is interested in coming to upcoming events
             wants_to_join_association = False  # the user is not interested in joining an association
